@@ -1,29 +1,32 @@
 import React, { useState, useCallback } from "react";
+import { trashOutline } from "ionicons/icons";
 import {
   IonButton,
   IonButtons,
   IonContent,
   IonHeader,
-  IonItem,
-  IonItemOption,
-  IonItemOptions,
-  IonItemSliding,
-  IonLabel,
-  IonList,
   IonModal,
-  IonNote,
   IonPage,
-  IonThumbnail,
   IonTitle,
   IonToolbar,
   IonAlert,
   useIonToast,
   IonSearchbar,
+  IonCard,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonImg,
+  IonRow,
 } from "@ionic/react";
 import ReactTimeAgo from "react-time-ago";
 import { useApp } from "../context/AppContext";
 import { Item } from "../types";
 import { ItemDetailsCard } from "../components/ItemDetailsCard";
+import "./tab2.css";
 
 const Tab2: React.FC = () => {
   const { items, removeItem } = useApp();
@@ -108,42 +111,56 @@ const Tab2: React.FC = () => {
         />
 
         {items && items.length > 0 ? (
-          <IonList inset={true} lines="inset">
-            {items
-              .filter((item) =>
-                item.name.toLowerCase().includes(searchQuery.toLowerCase()),
-              )
-              .map((item) => (
-                <IonItemSliding key={item.filepath}>
-                  <IonItem onClick={() => displayModal(item)}>
-                    <IonThumbnail slot="start">
-                      <img
-                        alt={item.name}
-                        src={item.webviewPath}
-                        className="ion-item-thumbnail"
-                      />
-                    </IonThumbnail>
-                    <IonLabel>{item.name}</IonLabel>
-                    <IonNote slot="end">
-                      <ReactTimeAgo date={item.timestamp} locale="en-US" />
-                    </IonNote>
-                  </IonItem>
-                  <IonItemOptions side="end">
-                    <IonItemOption
-                      color="danger"
-                      onClick={() => confirmDelete(item.filepath)}
+          <IonGrid fixed>
+            <IonRow>
+              {items
+                .filter((item) =>
+                  item.name.toLowerCase().includes(searchQuery.toLowerCase()),
+                )
+                .map((item) => (
+                  <IonCol size="12" size-md="6" size-lg="4" key={item.filepath}>
+                    <IonCard
+                      className="archive-card"
+                      button
+                      onClick={() => displayModal(item)}
                     >
-                      Delete
-                    </IonItemOption>
-                  </IonItemOptions>
-                </IonItemSliding>
-              ))}
-          </IonList>
+                      <div style={{ position: "relative" }}>
+                        <div className="square-image-container">
+                          <IonImg src={item.webviewPath} alt={item.name} />
+                        </div>
+                        <IonButton
+                          fill="outline"
+                          color="danger"
+                          style={{
+                            position: "absolute",
+                            top: "8px",
+                            right: "8px",
+                            zIndex: 10,
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            confirmDelete(item.filepath);
+                          }}
+                        >
+                          <IonIcon icon={trashOutline} />
+                        </IonButton>
+                      </div>
+                      <IonCardHeader>
+                        <IonCardTitle>{item.name}</IonCardTitle>
+                        <IonCardSubtitle>
+                          <ReactTimeAgo date={item.timestamp} locale="en-US" />
+                        </IonCardSubtitle>
+                      </IonCardHeader>
+                    </IonCard>
+                  </IonCol>
+                ))}
+            </IonRow>
+          </IonGrid>
         ) : (
           <div className="ion-padding ion-text-center">
-            <IonLabel color="medium">
-              No items in the archive. Capture an item to get started!
-            </IonLabel>
+            <IonTitle color="medium">
+              No items in the archive. Capture an object to get started!
+            </IonTitle>
           </div>
         )}
       </IonContent>

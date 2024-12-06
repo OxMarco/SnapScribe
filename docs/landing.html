@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <title>SnapScribe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simply point and shoot to instantly receive detailed descriptions and intriguing facts about any object. Several languages supported.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.8), rgba(70, 70, 229, 0.8));
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans leading-normal tracking-normal">
+    <!-- Hero Section -->
+    <section class="relative bg-cover bg-center h-screen">
+        <div class="absolute inset-0 gradient-overlay"></div>
+        <div class="flex items-center justify-center h-full w-full">
+            <div class="text-center z-10 px-4 max-w-2xl">
+                <h2 class="text-white text-4xl md:text-5xl font-light">Point, Shoot, and</h2>
+                <h1 class="text-white text-6xl md:text-7xl font-extrabold mt-2">Identify!</h1>
+                <p class="text-gray-200 mt-6 text-xl md:text-2xl">Discover the world with <span class="text-blue-300 font-semibold">SnapScribe</span></p>
+                <a href="#download" class="mt-10 inline-block bg-white text-blue-600 hover:bg-blue-50 font-semibold py-3 px-8 rounded-full shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    Download Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">Features</h2>
+            <p class="text-center text-gray-500 text-lg mb-12">Explore what SnapScribe has to offer</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="bg-blue-100 p-5 rounded-full shadow-md">
+                            <i class="fas fa-camera-retro text-5xl text-blue-500"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Instant Recognition</h3>
+                    <p class="text-gray-600">Get instant descriptions of any object you point your camera at.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="bg-green-100 p-5 rounded-full shadow-md">
+                            <i class="fas fa-language text-5xl text-green-500"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Multi-language Support</h3>
+                    <p class="text-gray-600">Learn in multiple languages, perfect for language learners.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-center">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="bg-purple-100 p-5 rounded-full shadow-md">
+                            <i class="fas fa-shield-halved text-5xl text-purple-500"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Privacy Aware</h3>
+                    <p class="text-gray-600">Keep ownership of your data with a local-first data storage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="bg-gray-900 py-20">
+        <div class="max-w-7xl mx-auto px-4 text-center text-white">
+            <h2 class="text-4xl font-bold mb-4">Get SnapScribe Today!</h2>
+            <p class="text-gray-300 text-lg mb-10">Available on iOS and Android devices.</p>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
+                <a href="#" class="transform hover:scale-105 transition duration-300">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="h-14">
+                </a>
+                <a href="#" class="transform hover:scale-105 transition duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-6">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-400">
+            <p>© (MIT) 2024 by <a href="https://impossiblelabs.xyz" target="_blank" class="hover:text-blue-300 transition duration-300">Impossible Labs Ltd.</a> Source code on <a href="https://github.com/OxMarco/SnapScribe" target="_blank">GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

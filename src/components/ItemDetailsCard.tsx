@@ -23,7 +23,9 @@ export const ItemDetailsCard: React.FC<{ item: Item | undefined }> = ({
           <i>{item.description}</i>
         </p>
         <br />
-        <h2><b>Fun Facts</b></h2>
+        <h2>
+          <b>Fun Facts</b>
+        </h2>
         <ul>
           {item.funFacts.map((fact, index) => (
             <li key={index}>{fact}</li>
