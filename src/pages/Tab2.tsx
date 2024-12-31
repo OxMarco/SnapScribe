@@ -24,8 +24,8 @@ import {
 } from "@ionic/react";
 import ReactTimeAgo from "react-time-ago";
 import { useApp } from "../context/AppContext";
-import { Item } from "../types";
 import { ItemDetailsCard } from "../components/ItemDetailsCard";
+import { Item } from "../types";
 import "./tab2.css";
 
 const Tab2: React.FC = () => {
@@ -48,7 +48,7 @@ const Tab2: React.FC = () => {
       presentToast({
         message: "Item deleted successfully",
         duration: 1000,
-        color: "danger",
+        color: "primary",
       });
     },
     [removeItem, presentToast],

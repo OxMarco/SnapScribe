@@ -5,53 +5,52 @@ import {
   Photo,
 } from "@capacitor/camera";
 import { Filesystem, Directory } from "@capacitor/filesystem";
-import { base64FromPath, getItemInfo } from "../helpers";
-import { Item, UserPhoto } from "../types";
 import { useApp } from "../context/AppContext";
+import { base64FromPath } from "../helpers";
+import { getItemInfo } from "../client";
+import { Item, UserPhoto } from "../types";
 
 export function usePhotoGallery() {
-  const { currentLang, apiKey } = useApp();
+  const { currentLang, userId } = useApp();
 
   const takePhoto = async (): Promise<Item> => {
-    try {
-      const photo = await Camera.getPhoto({
-        resultType: CameraResultType.Uri,
-        source: CameraSource.Camera,
-        quality: 100,
-      });
+    if (!userId) throw new Error("Identification error");
 
-      if (
-        !photo.format.includes("gif") &&
-        !photo.format.includes("png") &&
-        !photo.format.includes("jpg") &&
-        !photo.format.includes("jpeg") &&
-        !photo.format.includes("heic") &&
-        !photo.format.includes("webp")
-      )
-        throw "Invalid mime type";
+    const photo = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+      quality: 100,
+    });
 
-      const randomChars = crypto.randomUUID();
-      const fileName = randomChars + ".jpeg";
-      const savedFileImage = await savePicture(photo, fileName);
+    if (
+      !photo.format.includes("gif") &&
+      !photo.format.includes("png") &&
+      !photo.format.includes("jpg") &&
+      !photo.format.includes("jpeg") &&
+      !photo.format.includes("heic") &&
+      !photo.format.includes("webp")
+    )
+      throw new Error("Invalid mime type");
 
-      const { name, description, funFacts } = await getItemInfo(
-        currentLang,
-        savedFileImage,
-        apiKey,
-      );
+    const randomChars = crypto.randomUUID();
+    const fileName = randomChars + ".jpeg";
+    const savedFileImage = await savePicture(photo, fileName);
 
-      const item: Item = {
-        ...savedFileImage,
-        name,
-        description,
-        funFacts,
-        timestamp: Date.now(),
-      };
+    const { name, description, funFacts } = await getItemInfo(
+      currentLang,
+      savedFileImage,
+      userId,
+    );
 
-      return item;
-    } catch (error) {
-      throw error;
-    }
+    const item: Item = {
+      ...savedFileImage,
+      name,
+      description,
+      funFacts,
+      timestamp: Date.now(),
+    };
+
+    return item;
   };
 
   const savePicture = async (
