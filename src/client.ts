@@ -7,7 +7,7 @@ export const getItemInfo = async (
   lang: string,
   photo: UserPhoto,
   userId: string,
-): Promise<{ name: string; description: string; funFacts: string[] }> => {
+): Promise<{ name: string; description: string; synonyms: string[] }> => {
   const file = await Filesystem.readFile({
     path: photo.filepath,
     directory: Directory.Data,
@@ -35,7 +35,7 @@ export const getItemInfo = async (
   return {
     name: response.data["name"],
     description: response.data["description"],
-    funFacts: response.data["fun_facts"],
+    synonyms: response.data["synonyms"],
   };
 };
 

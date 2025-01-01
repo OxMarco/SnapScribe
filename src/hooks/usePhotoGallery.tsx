@@ -10,7 +10,7 @@ import { base64FromPath } from "../helpers";
 import { getItemInfo } from "../client";
 import { Item, UserPhoto } from "../types";
 
-export function usePhotoGallery() {
+export const usePhotoGallery = () => {
   const { currentLang, userId } = useApp();
 
   const takePhoto = async (): Promise<Item> => {
@@ -36,7 +36,7 @@ export function usePhotoGallery() {
     const fileName = randomChars + ".jpeg";
     const savedFileImage = await savePicture(photo, fileName);
 
-    const { name, description, funFacts } = await getItemInfo(
+    const { name, description, synonyms } = await getItemInfo(
       currentLang,
       savedFileImage,
       userId,
@@ -46,8 +46,9 @@ export function usePhotoGallery() {
       ...savedFileImage,
       name,
       description,
-      funFacts,
+      synonyms,
       timestamp: Date.now(),
+      lang: currentLang,
     };
 
     return item;
@@ -75,4 +76,4 @@ export function usePhotoGallery() {
   return {
     takePhoto,
   };
-}
+};

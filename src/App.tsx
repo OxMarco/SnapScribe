@@ -9,7 +9,7 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { albums, camera, cog } from "ionicons/icons";
+import { albums, book, camera } from "ionicons/icons";
 import Tab1 from "./pages/Tab1";
 import Tab2 from "./pages/Tab2";
 import Tab3 from "./pages/Tab3";
@@ -43,6 +43,7 @@ import "@ionic/react/css/palettes/dark.system.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import SettingsPage from "./pages/SettingsPage";
 
 setupIonicReact();
 
@@ -57,8 +58,11 @@ const App: React.FC = () => (
           <Route exact path="/archive">
             <Tab2 />
           </Route>
-          <Route exact path="/settings">
+          <Route exact path="/study">
             <Tab3 />
+          </Route>
+          <Route exact path="/settings">
+            <SettingsPage />
           </Route>
           <Route exact path="/">
             <Redirect to="/identify" />
@@ -71,8 +75,8 @@ const App: React.FC = () => (
           <IonTabButton tab="tab2" href="/archive">
             <IonIcon aria-hidden="true" icon={albums} />
           </IonTabButton>
-          <IonTabButton tab="tab3" href="/settings">
-            <IonIcon aria-hidden="true" icon={cog} />
+          <IonTabButton tab="tab3" href="/study">
+            <IonIcon aria-hidden="true" icon={book} />
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

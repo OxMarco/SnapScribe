@@ -17,8 +17,7 @@ export async function base64FromPath(path: string): Promise<string> {
 }
 
 export const getBCP47Code = (languageName: string): string => {
-  if (languageName.includes("US")) return "en-US";
-  if (languageName.includes("UK")) return "en-UK";
+  if (languageName.includes("english")) return "en-US";
   if (languageName.includes("spanish")) return "es-ES";
   if (languageName.includes("portuguese")) return "pt-PT";
   if (languageName.includes("french")) return "fr-FR";

@@ -1,21 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   IonContent,
   IonFab,
   IonFabButton,
-  IonHeader,
   IonIcon,
   IonPage,
   IonText,
-  IonToolbar,
-  IonTitle,
   IonProgressBar,
   useIonToast,
 } from "@ionic/react";
 import { camera, close } from "ionicons/icons";
 import { useApp } from "../context/AppContext";
 import { usePhotoGallery } from "../hooks/usePhotoGallery";
+import { useOnboarding } from "../hooks/useOnboarding";
 import { ItemDetailsCard } from "../components/ItemDetailsCard";
+import { TabHeader } from "../components/TabHeader";
 import { Item } from "../types";
 
 const Tab1: React.FC = () => {
@@ -23,7 +22,12 @@ const Tab1: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { addItem } = useApp();
   const { takePhoto } = usePhotoGallery();
+  const { onboarded, showWelcomeDialog } = useOnboarding();
   const [presentToast] = useIonToast();
+
+  useEffect(() => {
+    if (!onboarded) showWelcomeDialog();
+  }, [onboarded, showWelcomeDialog]);
 
   const handleTakePhoto = async () => {
     setLoading(true);
@@ -46,17 +50,12 @@ const Tab1: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Identify</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <TabHeader title="Identify" />
       <IonContent fullscreen className="ion-padding">
         {!recentItem && !loading && (
           <div className="ion-text-center ion-padding-top">
             <IonText color="medium">
-              <h2>Welcome to SnapScribe!</h2>
-              <p>Tap the camera button to capture and identify any object</p>
+              <h2 className="first-step">Ready when you are!</h2>
             </IonText>
           </div>
         )}

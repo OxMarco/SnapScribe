@@ -4,9 +4,9 @@ import { ErrorBoundary } from "react-error-boundary";
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
-import App from "./App";
 import { AppContextProvider } from "./context/AppContext";
 import { ErrorPage } from "./pages/ErrorPage";
+import App from "./App";
 
 defineCustomElements(window);
 
@@ -16,10 +16,10 @@ const container = document.getElementById("root");
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
-    <AppContextProvider>
-      <ErrorBoundary FallbackComponent={ErrorPage}>
+    <ErrorBoundary FallbackComponent={ErrorPage}>
+      <AppContextProvider>
         <App />
-      </ErrorBoundary>
-    </AppContextProvider>
+      </AppContextProvider>
+    </ErrorBoundary>
   </React.StrictMode>,
 );

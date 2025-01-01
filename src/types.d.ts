@@ -6,6 +6,7 @@ export interface UserPhoto {
 export interface Item extends UserPhoto {
   name: string;
   description: string;
-  funFacts: string[];
+  synonyms: string[];
   timestamp: number;
+  lang: string;
 }

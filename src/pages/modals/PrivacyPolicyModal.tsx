@@ -67,9 +67,7 @@ export const PrivacyPolicyModal = ({
           >
             OpenAI Privacy Policy
           </a>
-          . Information on the external server's data practices can be provided
-          upon request by contacting us at{" "}
-          <a href="mailto:info@impossiblelabs.xyz">info@impossiblelabs.xyz</a>.
+          , and their external server's privacy policy.
         </p>
 
         <h3>2. Data Collection by the App Developer</h3>
@@ -77,7 +75,9 @@ export const PrivacyPolicyModal = ({
           The app developer does not collect, store, or share any personal data.
           Images and associated data are temporarily handled by the external
           server and OpenAI solely for providing object recognition results. The
-          app developer does not retain any of this data.
+          app developer does not retain any of this data that is processed by
+          the external server and OpenAI in an encrypted form (https
+          connection).
         </p>
 
         <h3>3. Image Data</h3>
@@ -90,10 +90,9 @@ export const PrivacyPolicyModal = ({
 
         <h3>4. Children's Privacy</h3>
         <p>
-          This app is not intended for use by children under the age of 13
-          without parental supervision. If you believe your child has used the
-          app and shared personal data, please contact us immediately at{" "}
-          <a href="mailto:info@impossiblelabs.xyz">info@impossiblelabs.xyz</a>.
+          This app can be used by individuals of all ages. Moderation on OpenAI
+          side is used to ensure that the object recognition results are
+          appropriate for all users.
         </p>
 
         <h3>5. Your Consent</h3>

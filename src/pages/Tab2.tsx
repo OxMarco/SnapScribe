@@ -11,7 +11,6 @@ import {
   IonToolbar,
   IonAlert,
   useIonToast,
-  IonSearchbar,
   IonCard,
   IonCardHeader,
   IonCardSubtitle,
@@ -21,11 +20,16 @@ import {
   IonIcon,
   IonImg,
   IonRow,
+  IonText,
+  IonBadge,
+  IonCardContent,
 } from "@ionic/react";
 import ReactTimeAgo from "react-time-ago";
 import { useApp } from "../context/AppContext";
 import { ItemDetailsCard } from "../components/ItemDetailsCard";
+import { TabHeader } from "../components/TabHeader";
 import { Item } from "../types";
+import { getBCP47Code } from "../helpers";
 import "./tab2.css";
 
 const Tab2: React.FC = () => {
@@ -35,7 +39,6 @@ const Tab2: React.FC = () => {
   const [presentToast] = useIonToast();
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
 
   const displayModal = useCallback((item: Item) => {
     setSelectedItem(item);
@@ -61,18 +64,7 @@ const Tab2: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Archive</IonTitle>
-        </IonToolbar>
-        <IonToolbar>
-          <IonSearchbar
-            animated={true}
-            value={searchQuery}
-            onIonInput={(e) => setSearchQuery(e.detail.value!)}
-          ></IonSearchbar>
-        </IonToolbar>
-      </IonHeader>
+      <TabHeader title="Archive" />
       <IonContent fullscreen>
         <IonModal isOpen={isOpen} onDidDismiss={() => setIsOpen(false)}>
           <IonHeader>
@@ -113,54 +105,62 @@ const Tab2: React.FC = () => {
         {items && items.length > 0 ? (
           <IonGrid fixed>
             <IonRow>
-              {items
-                .filter((item) =>
-                  item.name.toLowerCase().includes(searchQuery.toLowerCase()),
-                )
-                .map((item) => (
-                  <IonCol size="12" size-md="6" size-lg="4" key={item.filepath}>
-                    <IonCard
-                      className="archive-card"
-                      button
-                      onClick={() => displayModal(item)}
-                    >
-                      <div style={{ position: "relative" }}>
-                        <div className="square-image-container">
-                          <IonImg src={item.webviewPath} alt={item.name} />
-                        </div>
-                        <IonButton
-                          fill="outline"
-                          color="danger"
-                          style={{
-                            position: "absolute",
-                            top: "8px",
-                            right: "8px",
-                            zIndex: 10,
-                          }}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            confirmDelete(item.filepath);
-                          }}
-                        >
-                          <IonIcon icon={trashOutline} />
-                        </IonButton>
+              {items.map((item) => (
+                <IonCol key={item.filepath}>
+                  <IonCard
+                    className="archive-card"
+                    button
+                    onClick={() => displayModal(item)}
+                  >
+                    <div style={{ position: "relative" }}>
+                      <div className="square-image-container">
+                        <IonImg src={item.webviewPath} alt={item.name} />
                       </div>
-                      <IonCardHeader>
-                        <IonCardTitle>{item.name}</IonCardTitle>
-                        <IonCardSubtitle>
-                          <ReactTimeAgo date={item.timestamp} locale="en-US" />
-                        </IonCardSubtitle>
-                      </IonCardHeader>
-                    </IonCard>
-                  </IonCol>
-                ))}
+                      <IonButton
+                        fill="outline"
+                        color="danger"
+                        style={{
+                          position: "absolute",
+                          top: "8px",
+                          right: "8px",
+                          zIndex: 10,
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          confirmDelete(item.filepath);
+                        }}
+                      >
+                        <IonIcon icon={trashOutline} />
+                      </IonButton>
+                    </div>
+                    <IonCardHeader>
+                      <IonCardTitle></IonCardTitle>
+                      <IonCardSubtitle
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <ReactTimeAgo
+                          date={item.timestamp}
+                          locale={getBCP47Code(item.lang)}
+                        />
+                        <IonBadge color="medium">{item.lang}</IonBadge>
+                      </IonCardSubtitle>
+                    </IonCardHeader>
+                    <IonCardContent>
+                      <IonText>
+                        <h1>{item.name}</h1>
+                      </IonText>
+                    </IonCardContent>
+                  </IonCard>
+                </IonCol>
+              ))}
             </IonRow>
           </IonGrid>
         ) : (
           <div className="ion-padding ion-text-center">
-            <IonTitle color="medium">
-              No items in the archive. Capture an object to get started!
-            </IonTitle>
+            <IonTitle color="medium">No items in the archive</IonTitle>
           </div>
         )}
       </IonContent>

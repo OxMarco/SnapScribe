@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { IonCard, IonCardContent, IonIcon, IonImg } from "@ionic/react";
+import {
+  IonBadge,
+  IonCard,
+  IonCardContent,
+  IonIcon,
+  IonImg,
+} from "@ionic/react";
 import { musicalNoteOutline, volumeHighOutline } from "ionicons/icons";
 import { TextToSpeech } from "@capacitor-community/text-to-speech";
 import { useApp } from "../context/AppContext";
@@ -10,7 +16,7 @@ import "./ItemDetailsCard.css";
 export const ItemDetailsCard: React.FC<{ item: Item | undefined }> = ({
   item,
 }) => {
-  const { currentLang, speechSpeed } = useApp();
+  const { speechSpeed } = useApp();
 
   const [isSpeaking, setIsSpeaking] = useState(false);
 
@@ -18,7 +24,7 @@ export const ItemDetailsCard: React.FC<{ item: Item | undefined }> = ({
     if (!item) return;
 
     setIsSpeaking(true);
-    const lang = getBCP47Code(currentLang);
+    const lang = getBCP47Code(item.lang);
 
     await TextToSpeech.speak({
       text: item.name,
@@ -56,11 +62,11 @@ export const ItemDetailsCard: React.FC<{ item: Item | undefined }> = ({
         </p>
         <br />
         <h2>
-          <b>Fun Facts</b>
+          <b>Thesaurus</b>
         </h2>
         <ul>
-          {item.funFacts.map((fact, index) => (
-            <li key={index}>{fact}</li>
+          {item.synonyms.map((synonym, index) => (
+            <li key={index}>{synonym}</li>
           ))}
         </ul>
       </IonCardContent>
