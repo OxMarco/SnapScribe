@@ -2,6 +2,7 @@ import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
+  IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -44,6 +45,9 @@ import "@ionic/react/css/palettes/dark.system.css";
 /* Theme variables */
 import "./theme/variables.css";
 import SettingsPage from "./pages/SettingsPage";
+import FlashcardsPage from "./pages/FlashcardsPage";
+import CrosswordPage from "./pages/CrosswordPage";
+import SentencesPage from "./pages/SentencesPage";
 
 setupIonicReact();
 
@@ -64,6 +68,15 @@ const App: React.FC = () => (
           <Route exact path="/settings">
             <SettingsPage />
           </Route>
+          <Route exact path="/flashcards">
+            <FlashcardsPage />
+          </Route>
+          <Route exact path="/crossword">
+            <CrosswordPage />
+          </Route>
+          <Route exact path="/sentences">
+            <SentencesPage />
+          </Route>
           <Route exact path="/">
             <Redirect to="/identify" />
           </Route>
@@ -71,12 +84,15 @@ const App: React.FC = () => (
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/identify">
             <IonIcon aria-hidden="true" icon={camera} />
+            <IonLabel>Identify</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/archive">
             <IonIcon aria-hidden="true" icon={albums} />
+            <IonLabel>Archive</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab3" href="/study">
             <IonIcon aria-hidden="true" icon={book} />
+            <IonLabel>Study</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

@@ -9,7 +9,7 @@ export const SUPPORTED_LANG = [
   "italian",
 ];
 export const DEFAULT_LANG = SUPPORTED_LANG[0];
-export const DEFAULT_SPEECH_SPEED = 80;
+export const DEFAULT_SPEECH_SPEED = 100;
 export const SERVER_ENDPOINT = "https://app.impossiblelabs.xyz/";
 export const API_KEY = "impossiblelabs";
 export const CACHE_EXPIRATION = 5 * 60 * 1000; // 5 minutes

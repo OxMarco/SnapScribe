@@ -103,7 +103,7 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
       );
       setItems(itemsWithBase64);
     } catch (error) {
-      throw new Error("Error loading items from Preferences:");
+      throw new Error("Error loading items");
     }
   };
 
@@ -117,7 +117,7 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
         setCurrentLang(value);
       }
     } catch (error) {
-      throw new Error("Error loading language from Preferences:");
+      throw new Error("Error loading language");
     }
   };
 
@@ -133,7 +133,7 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
         setSpeechSpeed(Number(value));
       }
     } catch (error) {
-      throw new Error("Error loading speech speed from Preferences:");
+      throw new Error("Error loading speech speed");
     }
   };
 

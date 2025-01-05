@@ -36,7 +36,7 @@ export const usePhotoGallery = () => {
     const fileName = randomChars + ".jpeg";
     const savedFileImage = await savePicture(photo, fileName);
 
-    const { name, description, synonyms } = await getItemInfo(
+    const { name, description, synonyms, funFact } = await getItemInfo(
       currentLang,
       savedFileImage,
       userId,
@@ -47,8 +47,9 @@ export const usePhotoGallery = () => {
       name,
       description,
       synonyms,
-      timestamp: Date.now(),
+      funFact,
       lang: currentLang,
+      timestamp: Date.now(),
     };
 
     return item;

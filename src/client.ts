@@ -7,7 +7,12 @@ export const getItemInfo = async (
   lang: string,
   photo: UserPhoto,
   userId: string,
-): Promise<{ name: string; description: string; synonyms: string[] }> => {
+): Promise<{
+  name: string;
+  description: string;
+  synonyms: string[];
+  funFact: string;
+}> => {
   const file = await Filesystem.readFile({
     path: photo.filepath,
     directory: Directory.Data,
@@ -24,6 +29,8 @@ export const getItemInfo = async (
       lang,
       image: file.data,
     },
+    connectTimeout: 15000,
+    readTimeout: 10000,
   };
 
   const response: HttpResponse = await CapacitorHttp.post(options);
@@ -36,6 +43,7 @@ export const getItemInfo = async (
     name: response.data["name"],
     description: response.data["description"],
     synonyms: response.data["synonyms"],
+    funFact: response.data["fun_fact"],
   };
 };
 

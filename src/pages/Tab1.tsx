@@ -66,7 +66,11 @@ const Tab1: React.FC = () => {
               <IonText color="secondary">
                 <h3>Identification in progress...</h3>
               </IonText>
-              <IonProgressBar type="indeterminate" color="primary" />
+              <IonProgressBar
+                className="mt-2"
+                type="indeterminate"
+                color="primary"
+              />
             </div>
           </>
         )}

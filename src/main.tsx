@@ -7,6 +7,7 @@ import en from "javascript-time-ago/locale/en";
 import { AppContextProvider } from "./context/AppContext";
 import { ErrorPage } from "./pages/ErrorPage";
 import App from "./App";
+import "./index.css";
 
 defineCustomElements(window);
 

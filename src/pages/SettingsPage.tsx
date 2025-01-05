@@ -16,13 +16,13 @@ import {
   IonRange,
   IonButtons,
   IonIcon,
-  useIonRouter,
 } from "@ionic/react";
 import { arrowBackCircleOutline } from "ionicons/icons";
 import { useApp } from "../context/AppContext";
 import { TermsOfServiceModal } from "./modals/TermsOfServiceModal";
 import { PrivacyPolicyModal } from "./modals/PrivacyPolicyModal";
 import { getCredits } from "../client";
+import { useGoBack } from "../hooks/useGoBack";
 
 const SettingsPage: React.FC = () => {
   const {
@@ -33,10 +33,10 @@ const SettingsPage: React.FC = () => {
     speechSpeed,
     changeSpeechSpeed,
   } = useApp();
-  const [creditsLeft, setCreditsLeft] = useState<number>(0);
+  const [creditsLeft, setCreditsLeft] = useState<number>();
   const [termsModalOpen, setTermsModalOpen] = useState(false);
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
-  const router = useIonRouter();
+  const { handleGoBack } = useGoBack();
 
   useEffect(() => {
     const getCreditsLeft = async () => {
@@ -49,21 +49,17 @@ const SettingsPage: React.FC = () => {
     getCreditsLeft();
   }, [userId]);
 
-  const handleGoBack = () => {
-    if (router.canGoBack()) {
-      router.goBack();
-    } else {
-      router.push("/"); // Fallback if no back history
-    }
-  };
-
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
             <IonButton onClick={handleGoBack}>
-              <IonIcon slot="icon-only" ios={arrowBackCircleOutline} />
+              <IonIcon
+                color="medium"
+                slot="icon-only"
+                ios={arrowBackCircleOutline}
+              />
             </IonButton>
           </IonButtons>
           <IonTitle>Settings</IonTitle>
